@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+
+
 <html lang="de">
 <head>
 <meta charset="utf-8"/>
@@ -20,9 +23,15 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text);
@@ -159,7 +168,12 @@ a { color: inherit; text-decoration: none; }
 .hero::before {
   content: "";
   position: absolute;
-  inset: 24px -100vw 20px;
+  top: 24px;
+  bottom: 20px;
+  left: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  transform: translateX(-50%);
   z-index: -1;
   border-block: 1px solid rgba(255, 255, 255, .06);
   background:
@@ -563,6 +577,9 @@ footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--muted)
 }
 @media (max-width: 620px) {
   .container { width: min(100% - 28px, 1180px); }
+  h2 { font-size: 34px; overflow-wrap: anywhere; }
+  .coming-soon-panel { max-width: 100%; }
+  .coming-soon-panel::after { right: -10px; font-size: 70px; }
   section { padding: 54px 0; }
   .btn { width: 100%; }
   .hero { padding-bottom: 48px; }
@@ -576,7 +593,23 @@ footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--muted)
   .brand-title { font-size: 19px; }
   .brand-sub { font-size: 9px; letter-spacing: .12em; }
 }
-  </style>
+  
+/* Verhindert horizontales Scrollen auf Mobilgeräten */
+main,
+header,
+footer,
+section {
+  max-width: 100%;
+}
+
+@supports (overflow: clip) {
+  html,
+  body,
+  main {
+    overflow-x: clip;
+  }
+}
+</style>
 </head>
 <body>
 <header class="nav">
