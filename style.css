@@ -565,3 +565,120 @@ section {
     overflow-x: clip;
   }
 }
+
+/* Impressum und Datenschutz */
+
+.legal-page {
+  min-height: 100vh;
+  padding: 60px 20px;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(227, 6, 32, .28), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(118, 0, 12, .25), transparent 28%),
+    linear-gradient(180deg, #08080b 0%, #11070a 48%, #08080b 100%);
+}
+
+.legal-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .18;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, .35) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.legal-container {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 55px);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(227, 6, 32, .14), transparent 30%),
+    rgba(255, 255, 255, .055);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.legal-container h1 {
+  max-width: none;
+  margin: 28px 0 35px;
+  font-size: clamp(42px, 7vw, 72px);
+  line-height: .95;
+  letter-spacing: -.045em;
+  text-transform: uppercase;
+}
+
+.legal-container h2 {
+  max-width: none;
+  margin: 38px 0 10px;
+  color: #ffffff;
+  font-size: 24px;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.legal-container h3 {
+  margin: 28px 0 8px;
+  color: #ffffff;
+  font-size: 19px;
+}
+
+.legal-container p,
+.legal-container li {
+  color: #d7d7df;
+  line-height: 1.75;
+}
+
+.legal-container ul {
+  padding-left: 24px;
+}
+
+.legal-container a {
+  color: var(--red-soft);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.legal-container a:hover {
+  color: #ffffff;
+}
+
+.legal-back {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 11px 17px;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, .06);
+  font-weight: 800;
+  text-decoration: none !important;
+}
+
+.legal-back:hover {
+  background: rgba(227, 6, 32, .18);
+}
+
+@media (max-width: 600px) {
+  .legal-page {
+    padding: 25px 12px;
+  }
+
+  .legal-container {
+    padding: 25px 20px;
+    border-radius: 24px;
+  }
+
+  .legal-container h1 {
+    font-size: 38px;
+  }
+
+  .legal-container h2 {
+    font-size: 21px;
+  }
+}
