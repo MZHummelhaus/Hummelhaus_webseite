@@ -462,7 +462,7 @@ h2 {
   max-height: 96px;
   object-fit: contain;
 }
-.sponsor-card-pflege .sponsor-logo img { max-height: 124px; }
+.sponsor-card-pflege .sponsor-logo img { max-height: 150px; }
 .sponsor-card-berghof .sponsor-logo img { max-height: 96px; }
 .sponsor-card-medium { min-height: 150px; padding: 18px; }
 .sponsor-card-medium .sponsor-logo img { max-height: 82px; }
