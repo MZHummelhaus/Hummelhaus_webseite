@@ -67,50 +67,69 @@
       </aside>
     </section>
     <section class="container" id="lineup">
-      <div class="lineup-panel">
-        <p class="eyebrow">Line-up 2027</p>
-        <h2>Bands &amp; DJs</h2>
+      <p class="eyebrow">Line-up 2027</p>
+      <h2>Bands &amp; DJs</h2>
 
-        <div class="lineup-day">
-          <div class="lineup-date">
-            <h3>Freitag</h3>
-            <p>18.06.2027</p>
-          </div>
-          <ul class="lineup-acts">
-            <li>Nico from the South</li>
-            <li>Guterzogene Asis</li>
-            <li>deMusiax</li>
-            <li>DJ Fabi</li>
-          </ul>
+      <div class="lineup-day">
+        <div class="lineup-date">
+          <h3>Freitag</h3>
+          <p>18.06.2027</p>
         </div>
-
-        <div class="lineup-day">
-          <div class="lineup-date">
-            <h3>Samstag</h3>
-            <p>19.06.2027</p>
-          </div>
-          <ul class="lineup-acts">
-            <li>»CLSTRFCK«</li>
-            <li>not available</li>
-            <li>NoRMAhl</li>
-            <li>5 kleine Jägermeister</li>
-            <li>DJ Stodl</li>
-          </ul>
-        </div>
-
-        <div class="lineup-day">
-          <div class="lineup-date">
-            <h3>Sonntag</h3>
-            <p>20.06.2027</p>
-          </div>
-          <ul class="lineup-acts">
-            <li>Schützenkapelle Meinheim</li>
-          </ul>
-        </div>
-
-        <p class="lineup-note">Die genauen Spielzeiten geben wir rechtzeitig bekannt.</p>
+        <ul class="lineup-acts">
+          <li class="lineup-act"><img src="Bands/nico-from-the-south.png" alt="Nico from the South" width="438"
+              height="63" loading="lazy"></li>
+          <li class="lineup-act"><img src="Bands/guterzogene-asis.png" alt="Guterzogene Asis" width="419" height="74"
+              loading="lazy"></li>
+          <li class="lineup-act"><img src="Bands/demusiax.png" alt="deMusiax" width="238" height="43" loading="lazy">
+          </li>
+          <li class="lineup-act"><img src="Bands/dj-fabi.png" alt="DJ Fabi" width="201" height="42" loading="lazy"></li>
+        </ul>
       </div>
+
+      <div class="lineup-day">
+        <div class="lineup-date">
+          <h3>Samstag</h3>
+          <p>19.06.2027</p>
+        </div>
+        <ul class="lineup-acts">
+          <li class="lineup-act"><img src="Bands/clstrfck.png" alt="CLSTRFCK" width="319" height="50" loading="lazy">
+          </li>
+          <li class="lineup-act"><img src="Bands/not-available.png" alt="not available" width="430" height="42"
+              loading="lazy"></li>
+          <li class="lineup-act"><img src="Bands/normahl.png" alt="NoRMAhl" width="225" height="61" loading="lazy"></li>
+          <li class="lineup-act"><img src="Bands/5-kleine-jaegermeister.png" alt="5 kleine Jägermeister" width="739"
+              height="53" loading="lazy"></li>
+          <li class="lineup-act"><img src="Bands/dj-stodl.png" alt="DJ Stodl" width="202" height="51" loading="lazy">
+          </li>
+        </ul>
+      </div>
+
+      <div class="lineup-day">
+        <div class="lineup-date">
+          <h3>Sonntag</h3>
+          <p>20.06.2027</p>
+        </div>
+        <ul class="lineup-acts">
+          <li class="lineup-act"><img src="Bands/schuetzenkapelle-meinheim.png" alt="Schützenkapelle Meinheim"
+              width="538" height="49" loading="lazy"></li>
+        </ul>
+      </div>
+
+      <p class="lineup-note">Die genauen Spielzeiten geben wir rechtzeitig bekannt.</p>
     </section>
+    <!-- Fehlt ein Band-Logo im Ordner "Bands", wird stattdessen der Name als Text angezeigt. -->
+    <script>
+      document.querySelectorAll('.lineup-act img').forEach(img => {
+        const showName = () => {
+          const name = document.createElement('span');
+          name.className = 'lineup-act-name';
+          name.textContent = img.alt;
+          img.replaceWith(name);
+        };
+        img.addEventListener('error', showName, { once: true });
+        if (img.complete && img.naturalWidth === 0) showName();
+      });
+    </script>
     <section class="container" id="infos">
       <p class="eyebrow">Festival</p>
       <h2>Alles Wichtige</h2>
