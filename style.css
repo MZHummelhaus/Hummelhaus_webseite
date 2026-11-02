@@ -720,8 +720,12 @@ section {
   padding: 0;
   list-style: none;
 }
+.lineup-acts li { display: flex; min-width: 0; }
+.lineup-acts li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .lineup-act {
+  position: relative;
   display: flex;
+  width: 100%;
   min-width: 0;
   min-height: 150px;
   align-items: center;
@@ -729,14 +733,40 @@ section {
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 26px 30px;
+  color: var(--text);
   background: var(--panel);
+  font: inherit;
   transition: border-color .2s ease, background .2s ease;
 }
-.lineup-act:last-child:nth-child(odd) { grid-column: 1 / -1; }
-.lineup-act:hover {
+/* Nur klickbare Kacheln reagieren */
+a.lineup-act[href],
+button.lineup-act { cursor: pointer; }
+a.lineup-act[href]:hover,
+button.lineup-act:hover {
   border-color: rgba(227, 6, 32, .7);
   background: rgba(227, 6, 32, .08);
 }
+a.lineup-act[href]:focus-visible,
+button.lineup-act:focus-visible {
+  outline: 2px solid var(--red-soft);
+  outline-offset: 3px;
+}
+/* Kleiner Hinweis oben rechts: Pfeil = Webseite, "Foto" = Bild */
+a.lineup-act[href]::after,
+button.lineup-act-photo::after {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  transition: color .2s ease;
+}
+a.lineup-act[href]::after { content: "↗"; font-size: 16px; }
+button.lineup-act-photo::after { content: "FOTO"; }
+a.lineup-act[href]:hover::after,
+button.lineup-act-photo:hover::after { color: var(--red-soft); }
 .lineup-act img {
   display: block;
   max-width: 100%;
@@ -758,6 +788,61 @@ section {
   font-size: 16px;
   line-height: 1.6;
 }
+
+/* Platzhalter für noch nicht bestätigte Acts */
+.lineup-act-soon {
+  border: 1px dashed rgba(227, 6, 32, .55);
+  background:
+    repeating-linear-gradient(135deg, rgba(227, 6, 32, .07) 0 12px, transparent 12px 24px),
+    var(--panel);
+}
+.lineup-act-soon span {
+  color: var(--red-soft);
+  font-family: var(--mono);
+  font-size: clamp(16px, 1.8vw, 20px);
+  letter-spacing: .3em;
+  text-transform: uppercase;
+}
+
+/* Foto-Fenster */
+.lineup-dialog {
+  max-width: min(92vw, 1000px);
+  max-height: 90vh;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 0;
+  overflow: hidden;
+  background: #0a0a0d;
+  box-shadow: var(--shadow);
+}
+.lineup-dialog::backdrop {
+  background: rgba(0, 0, 0, .82);
+  backdrop-filter: blur(6px);
+}
+.lineup-dialog img {
+  display: block;
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+.lineup-dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, .65);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.lineup-dialog-close:hover { background: var(--red); }
+
 @media (max-width: 900px) {
   .lineup-day { grid-template-columns: 1fr; padding: 28px 0; }
   .lineup-date {
