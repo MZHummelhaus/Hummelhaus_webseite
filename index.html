@@ -70,19 +70,30 @@
       <p class="eyebrow">Line-up 2027</p>
       <h2>Bands &amp; DJs</h2>
 
+      <!--
+  Webseiten der Bands eintragen:
+  Bei jeder Band steht <a class="lineup-act" ...>. Trag dort href="https://..." ein,
+  dann ist die Kachel klickbar und öffnet die Seite in einem neuen Tab.
+  Ohne href bleibt die Kachel einfach ein Logo ohne Link.
+-->
+
       <div class="lineup-day">
         <div class="lineup-date">
           <h3>Freitag</h3>
           <p>18.06.2027</p>
         </div>
         <ul class="lineup-acts">
-          <li class="lineup-act"><img src="Bands/nico-from-the-south.png" alt="Nico from the South" width="438"
-              height="63" loading="lazy"></li>
-          <li class="lineup-act"><img src="Bands/guterzogene-asis.png" alt="Guterzogene Asis" width="419" height="74"
-              loading="lazy"></li>
-          <li class="lineup-act"><img src="Bands/demusiax.png" alt="deMusiax" width="238" height="43" loading="lazy">
-          </li>
-          <li class="lineup-act"><img src="Bands/dj-fabi.png" alt="DJ Fabi" width="201" height="42" loading="lazy"></li>
+          <li><a class="lineup-act" href="https://linktr.ee/nicofromthesouth" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/nico-from-the-south.png" alt="Nico from the South" width="438"
+                height="63" loading="lazy"></a></li>
+          <li><a class="lineup-act" href="https://guterzogeneasis.de/" target="_blank" rel="noopener noreferrer"><img
+                src="Bands/guterzogene-asis.png" alt="Guterzogene Asis" width="419" height="74" loading="lazy"></a></li>
+          <li><a class="lineup-act" href="https://www.instagram.com/demusiax/" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/demusiax.png" alt="deMusiax" width="238" height="43"
+                loading="lazy"></a></li>
+          <li><a class="lineup-act" href="https://www.instagram.com/dj_fabi7/" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/dj-fabi.png" alt="DJ Fabi" width="201" height="42"
+                loading="lazy"></a></li>
         </ul>
       </div>
 
@@ -92,15 +103,18 @@
           <p>19.06.2027</p>
         </div>
         <ul class="lineup-acts">
-          <li class="lineup-act"><img src="Bands/clstrfck.png" alt="CLSTRFCK" width="319" height="50" loading="lazy">
+          <li><a class="lineup-act" href="https://clstrfck.de/" target="_blank" rel="noopener noreferrer"><img
+                src="Bands/clstrfck.png" alt="CLSTRFCK" width="319" height="50" loading="lazy"></a></li>
+          <li><a class="lineup-act" href="https://www.instagram.com/notavailablebandofficial/" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/not-available.png" alt="not available" width="430" height="42"
+                loading="lazy"></a></li>
+          <li>
+            <div class="lineup-act lineup-act-soon"><span>Coming soon</span></div>
           </li>
-          <li class="lineup-act"><img src="Bands/not-available.png" alt="not available" width="430" height="42"
-              loading="lazy"></li>
-       <!-- <li class="lineup-act"><img src="Bands/normahl.png" alt="NoRMAhl" width="225" height="61" loading="lazy"></li> -->
-          <li class="lineup-act"><img src="Bands/5-kleine-jaegermeister.png" alt="5 kleine Jägermeister" width="739"
-              height="53" loading="lazy"></li>
-          <li class="lineup-act"><img src="Bands/dj-stodl.png" alt="DJ Stodl" width="202" height="51" loading="lazy">
-          </li>
+          <li><a class="lineup-act" href="https://www.instagram.com/5kleinejaegermeister/" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/5-kleine-jaegermeister.png" alt="5 kleine Jägermeister"
+                width="739" height="53" loading="lazy"></a></li>
+          <li><div class="lineup-act"><img src="Bands/dj-stodl.png" alt="DJ Stodl" width="202" height="51" loading="lazy"></div></li>
         </ul>
       </div>
 
@@ -110,13 +124,47 @@
           <p>20.06.2027</p>
         </div>
         <ul class="lineup-acts">
-          <li class="lineup-act"><img src="Bands/schuetzenkapelle-meinheim.png" alt="Schützenkapelle Meinheim"
-              width="538" height="49" loading="lazy"></li>
+          <li><a class="lineup-act" href="https://www.schuetzenkapelle-meinheim.de/" target="_blank"
+              rel="noopener noreferrer"><img src="Bands/schuetzenkapelle-meinheim.png" alt="Schützenkapelle Meinheim"
+                width="538" height="49" loading="lazy"></a></li>
         </ul>
       </div>
 
       <p class="lineup-note">Die genauen Spielzeiten geben wir rechtzeitig bekannt.</p>
     </section>
+
+    <dialog class="lineup-dialog" id="lineup-dialog" aria-label="Foto">
+      <button class="lineup-dialog-close" type="button" aria-label="Schließen">&times;</button>
+      <img src="" alt="">
+    </dialog>
+
+    <script>
+      // Fehlt ein Band-Logo im Ordner "Bands", wird stattdessen der Name als Text angezeigt.
+      document.querySelectorAll('.lineup-act img').forEach(img => {
+        const showName = () => {
+          const name = document.createElement('span');
+          name.className = 'lineup-act-name';
+          name.textContent = img.alt;
+          img.replaceWith(name);
+        };
+        img.addEventListener('error', showName, { once: true });
+        if (img.complete && img.naturalWidth === 0) showName();
+      });
+
+      // Foto in groß öffnen (DJ Stodl)
+      const lineupDialog = document.getElementById('lineup-dialog');
+      const lineupDialogImg = lineupDialog.querySelector('img');
+      document.querySelectorAll('.lineup-act-photo').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const name = btn.querySelector('img, .lineup-act-name');
+          lineupDialogImg.src = btn.dataset.photo;
+          lineupDialogImg.alt = (name.alt || name.textContent) + ' – Foto';
+          lineupDialog.showModal();
+        });
+      });
+      lineupDialog.querySelector('.lineup-dialog-close').addEventListener('click', () => lineupDialog.close());
+      lineupDialog.addEventListener('click', e => { if (e.target === lineupDialog) lineupDialog.close(); });
+    </script>
     <!-- Fehlt ein Band-Logo im Ordner "Bands", wird stattdessen der Name als Text angezeigt. -->
     <script>
       document.querySelectorAll('.lineup-act img').forEach(img => {
